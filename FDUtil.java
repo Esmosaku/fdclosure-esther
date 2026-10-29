@@ -56,7 +56,8 @@ public final class FDUtil {
 
   /**
    * Exhaustively resolves transitive FDs with respect to the given set of FDs
-   * (NB: not the best implementation with a double for loop within a while loop but it passes the test cases)
+   * (NB: not the best implementation with a double for loop within a while loop but it passes the test cases and works as it should)
+   * 
    * @param fdset (Immutable) FD Set
    * @return all transitive FDs with respect to the input FD set
    */
@@ -137,11 +138,11 @@ public final class FDUtil {
       finalSet.add(new HashSet<>());
       return finalSet;
     }
-    Set<E> remaining = new HashSet<>(set);
-    E element = remaining.iterator().next();
-    remaining.remove(element);
+    Set<E> remainingSet = new HashSet<>(set);
+    E element = remainingSet.iterator().next();
+    remainingSet.remove(element);
 
-    Set<Set<E>> recurseSet = powerSet(remaining);
+    Set<Set<E>> recurseSet = powerSet(remainingSet);
 
     for (Set<E> eachSet: recurseSet){
       finalSet.add(eachSet);
